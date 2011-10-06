@@ -13,8 +13,6 @@ $di = new Zend\Di\Di($definitions);
 
 $baz = $di->get('Foo\Bar\Baz');
 
-var_dump($baz);
-
 // expression to test
 $works = ($baz->bam instanceof Foo\Bar\Bam);
 
