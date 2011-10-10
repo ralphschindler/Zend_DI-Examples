@@ -8,7 +8,7 @@ namespace Foo\Bar {
         /**
          * @Di\Inject()
          */
-        public function setBam(Bam $bam){
+        public function injectBam(Bam $bam){
             $this->bam = $bam;
         }
 
@@ -20,6 +20,7 @@ namespace Foo\Bar {
 namespace {
     include 'zf2bootstrap.php';
     $di = new Zend\Di\Di;
+    $di->definitions()->getDefinitionForClass('Foo\Bar\Baz')->getIntrospectionStrategy()->setUseAnnotations(true);
     $baz = $di->get('Foo\Bar\Baz');
 
     // expression to test
