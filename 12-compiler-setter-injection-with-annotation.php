@@ -1,18 +1,27 @@
 <?php
 
-include 'zf2bootstrap.php';
+include 'Zend_Di-2.0.0beta1.phar';
 
 // must register autoloader
-$autoloader->registerNamespace('Foo\Bar', __DIR__ . '/12');
+spl_autoload_register(function ($class) {
+    if (strpos($class, 'Foo\Bar') !== 0) {
+        return;
+    }
+    include_once __DIR__ . '/12/' . str_replace('\\', '/', substr($class, 7)) . '.php';
+});
 
+// compile phase
 $compiler = new Zend\Di\Definition\CompilerDefinition();
+$compiler->getIntrospectionStrategy()->setUseAnnotations(true); // TURN ANNOTATIONS ON
 $compiler->addDirectory(__DIR__ . '/12/');
 $compiler->compile();
-$definitions = new Zend\Di\DefinitionList($compiler);
+$arrayDef = $compiler->toArrayDefinition();
+
+$definitions = new Zend\Di\DefinitionList($arrayDef);
 $di = new Zend\Di\Di($definitions);
 
 $baz = $di->get('Foo\Bar\Baz');
-
+var_dump($baz);
 // expression to test
 $works = ($baz->bam instanceof Foo\Bar\Bam);
 

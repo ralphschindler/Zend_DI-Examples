@@ -1,28 +1,32 @@
 <?php
 
-namespace Foo\Bar {
-    class Baz implements BamAwareInterface {
-        public $bam;
-        public function setBam(Bam $bam){
-            $this->bam = $bam;
+namespace MovieApp {
+    
+    class Lister implements FinderAwareInterface {
+        public $finder;
+        public function setFinder(Finder $finder){
+            $this->finder = $finder;
         }
     }
-    class Bam {
+    
+    class Finder {
+        public function findAllByName($name) {}
     }
-    interface BamAwareInterface
+    
+    interface FinderAwareInterface
     {
-        public function setBam(Bam $bam);
+        public function setFinder(Finder $finder);
     }
 }
 
 namespace {
-    include 'zf2bootstrap.php';
+    include 'Zend_Di-2.0.0beta1.phar';
     $di = new Zend\Di\Di;
-    $baz = $di->get('Foo\Bar\Baz');
+    $lister = $di->get('MovieApp\Lister');
     
     
     // expression to test
-    $works = ($baz->bam instanceof Foo\Bar\Bam);
+    $works = ($lister->finder instanceof MovieApp\Finder);
 
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');

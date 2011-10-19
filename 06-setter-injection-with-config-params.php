@@ -1,13 +1,13 @@
 <?php
 
-namespace Foo\Bar {
-    class Baz {
-        public $bam;
-        public function __construct(Bam $bam){
-            $this->bam = $bam;
+namespace MovieApp {
+    class Lister {
+        public $dbFinder;
+        public function __construct(DbFinder $dbFinder){
+            $this->dbFinder = $dbFinder;
         }
     }
-    class Bam {
+    class DbFinder {
         public $username, $password = null;
         public function setCredentials($username, $password)
         {
@@ -18,19 +18,19 @@ namespace Foo\Bar {
 }
 
 namespace {
-    include 'zf2bootstrap.php';
+    include 'Zend_Di-2.0.0beta1.phar';
     $di = new Zend\Di\Di;
-    $di->instanceManager()->setParameters('Foo\Bar\Bam', array(
+    $di->instanceManager()->setParameters('MovieApp\DbFinder', array(
         'username' => 'my-username',
         'password' => 'my-password'
     ));
-    $baz = $di->get('Foo\Bar\Baz');
+    $lister = $di->get('MovieApp\Lister');
 
     // expression to test
     $works = (
-        $baz->bam instanceof Foo\Bar\Bam
-        && $baz->bam->username == 'my-username'
-        && $baz->bam->password == 'my-password'
+        $lister->dbFinder instanceof MovieApp\DbFinder
+        && $lister->dbFinder->username == 'my-username'
+        && $lister->dbFinder->password == 'my-password'
     );
 
     // display result

@@ -1,24 +1,24 @@
 <?php
 
-namespace Foo\Bar {
-    class Baz {
-        public $bam;
-        public function __construct(Bam $bam){
-            $this->bam = $bam;
+namespace MovieApp {
+    class Lister {
+        public $finder;
+        public function __construct(Finder $finder){
+            $this->finder = $finder;
         }
     }
-    class Bam {
+    class Finder {
         
     }
 }
 
 namespace {
-    include 'zf2bootstrap.php';
+    include 'Zend_Di-2.0.0beta1.phar';
     $di = new Zend\Di\Di;
-    $baz = $di->get('Foo\Bar\Baz');
+    $lister = $di->get('MovieApp\Lister');
     
     // expression to test
-    $works = ($baz->bam instanceof Foo\Bar\Bam);
+    $works = ($lister->finder instanceof MovieApp\Finder);
     
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');

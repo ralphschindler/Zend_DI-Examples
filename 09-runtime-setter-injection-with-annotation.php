@@ -1,30 +1,29 @@
 <?php
 
-namespace Foo\Bar {
-    use Zend\Di\Definition\Annotation as Di;
-    class Baz {
-        public $bam;
 
+namespace MovieApp {
+    use Zend\Di\Definition\Annotation as Di;
+    class Lister {
+        public $finder;
         /**
          * @Di\Inject()
          */
-        public function injectBam(Bam $bam){
-            $this->bam = $bam;
+        public function setFinder(Finder $finder){
+            $this->finder = $finder;
         }
-
     }
-    class Bam {
+    class Finder {
     }
 }
 
 namespace {
-    include 'zf2bootstrap.php';
+    include 'Zend_Di-2.0.0beta1.phar';
     $di = new Zend\Di\Di;
-    $di->definitions()->getDefinitionForClass('Foo\Bar\Baz')->getIntrospectionStrategy()->setUseAnnotations(true);
-    $baz = $di->get('Foo\Bar\Baz');
+    $di->definitions()->getDefinitionForClass('MovieApp\Lister')->getIntrospectionStrategy()->setUseAnnotations(true);
+    $lister = $di->get('MovieApp\Lister');
 
     // expression to test
-    $works = ($baz->bam instanceof Foo\Bar\Bam);
+    $works = ($lister->finder instanceof MovieApp\Finder);
 
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');

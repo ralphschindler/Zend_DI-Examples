@@ -17,7 +17,7 @@ namespace DifferentNs {
 }
 
 namespace {
-    include 'zf2bootstrap.php';
+    include 'Zend_Di-2.0.0beta1.phar';
     $di = new Zend\Di\Di;
     $di->configure(new Zend\Di\Configuration(array(
         'definition' => array(
