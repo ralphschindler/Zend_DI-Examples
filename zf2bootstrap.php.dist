@@ -1,7 +1,0 @@
-<?php
-
-namespace zf2bootstrap;
-
-require_once '/path/to/ZF2/library/Zend/Loader/StandardAutoloader.php';
-$autoloader = new \Zend\Loader\StandardAutoloader;
-spl_autoload_register(array($autoloader, 'autoload'));

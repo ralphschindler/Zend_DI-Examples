@@ -9,7 +9,7 @@ namespace MovieApp {
     }
     class DbFinder {
         public $username, $password = null;
-        public function setCredentials($username, $password)
+        public function __construct($username, $password)
         {
             $this->username = $username;
             $this->password = $password;
@@ -18,13 +18,15 @@ namespace MovieApp {
 }
 
 namespace {
-    include 'Zend_Di-2.0.0beta1.phar';
+    // bootstrap
+    include 'zf2bootstrap' . ((stream_resolve_include_path('zf2bootstrap.php')) ? '.php' : '.dist.php');
+
     $di = new Zend\Di\Di;
     $lister = $di->get('MovieApp\Lister', array(
         'username' => 'my-username',
         'password' => 'my-password'
     ));
-
+    
     // expression to test
     $works = (
         $lister->dbFinder instanceof MovieApp\DbFinder
