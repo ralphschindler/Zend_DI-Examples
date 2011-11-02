@@ -25,8 +25,8 @@ namespace {
         'definition' => array(
             'class' => array(
                 'System\Mapper' => array(
-                    'addBlock' => array(
-                        'driver' => array('type' => 'Application\Block', 'required' => true),
+                    'addDriver' => array(
+                        'driver' => array('type' => 'System\Driver', 'required' => true),
                         'name' => array('required' => true)
                     )
                 )
@@ -35,20 +35,22 @@ namespace {
         'instance' => array(
             'System\Mapper' => array(
                 'injections' => array(
-                    array('block' => 'DifferentNs\DriverOne', 'name' => 'foo'),
-                    array('block' => 'DifferentNs\DriverTwo', 'name' => 'bar')
+                    'addDriver' => array(
+                        array('driver' => 'DifferentNs\DriverOne', 'name' => 'foo'),
+                        array('driver' => 'DifferentNs\DriverTwo', 'name' => 'bar')
+                    )
                 )
             )
         )
     )));
-    $page = $di->get('System\Mapper');
+    $mapper = $di->get('System\Mapper');
 
     // expression to test
     $works = (
-        $page->blocks[0][0] instanceof DifferentNs\DriverOne
-        && $page->blocks[1][0] instanceof DifferentNs\DriverTwo
+        $mapper->drivers[0][0] instanceof DifferentNs\DriverOne
+        && $mapper->drivers[1][0] instanceof DifferentNs\DriverTwo
     );
-
+var_dump($mapper);
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');
 }
