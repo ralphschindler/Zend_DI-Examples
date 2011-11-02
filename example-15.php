@@ -50,7 +50,7 @@ namespace {
         $mapper->drivers[0][0] instanceof DifferentNs\DriverOne
         && $mapper->drivers[1][0] instanceof DifferentNs\DriverTwo
     );
-var_dump($mapper);
+
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');
 }

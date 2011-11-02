@@ -1,6 +1,7 @@
 <?php
 
-include 'Zend_Di-2.0.0beta1.phar';
+// bootstrap
+include 'zf2bootstrap' . ((stream_resolve_include_path('zf2bootstrap.php')) ? '.php' : '.dist.php');
 
 // must register autoloader
 spl_autoload_register(function ($class) {
@@ -21,7 +22,7 @@ $definitions = new Zend\Di\DefinitionList($arrayDef);
 $di = new Zend\Di\Di($definitions);
 
 $baz = $di->get('Foo\Bar\Baz');
-var_dump($baz);
+
 // expression to test
 $works = ($baz->bam instanceof Foo\Bar\Bam);
 

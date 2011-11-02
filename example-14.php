@@ -20,10 +20,24 @@ namespace {
     include 'zf2bootstrap' . ((stream_resolve_include_path('zf2bootstrap.php')) ? '.php' : '.dist.php');
 
     $di = new Zend\Di\Di;
+
+    $di->instanceManager()->setParameters(
+        'MovieApp\Lister',
+        array(
+            'MovieApp\Lister::setFinderA:0' => new MovieApp\Finder,
+            'MovieApp\Lister::setFinderB:0' => function () {
+                return new MovieApp\Finder;
+            }
+        )
+    );
+
     $lister = $di->get('MovieApp\Lister');
 
     // expression to test
-    $works = ($lister->finder instanceof MovieApp\Finder);
+    $works = ($lister->finderA instanceof MovieApp\Finder
+        && $lister->finderB instanceof MovieApp\Finder
+        && $lister->finderA !== $lister->finderB
+    );
 
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');
