@@ -21,7 +21,7 @@ namespace {
     
     // expression to test
     $works = ($lister->finder instanceof MovieApp\Finder);
-    
+
     // display result
     echo (($works) ? 'It works!' : 'It DOES NOT work!');
 }
