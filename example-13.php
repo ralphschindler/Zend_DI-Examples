@@ -31,6 +31,6 @@ namespace {
     $works = ($lister->finder instanceof MovieApp\Finder && $lister->finder->id === 'foo');
 
     // display result
-    echo (($works) ? 'It works!' : 'It DOES NOT work!');
+    echo (($works) ? 'It works!' : 'It DOES NOT work!') . PHP_EOL;
 }
 

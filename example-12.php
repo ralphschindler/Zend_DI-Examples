@@ -27,4 +27,4 @@ $baz = $di->get('Foo\Bar\Baz');
 $works = ($baz->bam instanceof Foo\Bar\Bam);
 
 // display result
-echo (($works) ? 'It works!' : 'It DOES NOT work!');
+echo (($works) ? 'It works!' : 'It DOES NOT work!') . PHP_EOL;

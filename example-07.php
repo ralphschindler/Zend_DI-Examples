@@ -35,5 +35,5 @@ namespace {
     );
 
     // display result
-    echo (($works) ? 'It works!' : 'It DOES NOT work!');
+    echo (($works) ? 'It works!' : 'It DOES NOT work!') . PHP_EOL;
 }
