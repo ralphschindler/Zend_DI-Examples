@@ -25,11 +25,7 @@ namespace {
     $di = new Zend\Di\Di;
     $lister = new MovieApp\Lister;
 
-var_dump($lister);
-
     $di->injectDependencies($lister);
-
-var_dump($lister);
 
     // expression to test
     $works = ($lister->finder instanceof MovieApp\Finder);
